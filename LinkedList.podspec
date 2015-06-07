@@ -16,16 +16,11 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LinkedList"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A simple doubly linked list implementation"
 
   s.description  = <<-DESC
-                   A longer description of LinkedList in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
+  				   A raw C based implementation of a doubly linked list implementation to build from.
                    DESC
   s.homepage     = "https://github.com/panyam/LinkedList"
   s.license      = "Apache License, Version 2.0"
@@ -43,20 +38,7 @@ Pod::Spec.new do |s|
   s.author             = { "Sri Panyam" => "sri.panyam@gmail.com" }
   # Or just: s.author    = "Sri Panyam"
   # s.authors            = { "Sri Panyam" => "sri.panyam@gmail.com" }
-  # s.social_media_url   = "http://twitter.com/Sri Panyam"
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  If this Pod runs only on iOS or OS X, then specify the platform and
-  #  the deployment target. You can optionally include the target after the platform.
-  #
-
-  # s.platform     = :ios
-  # s.platform     = :ios, "5.0"
-
-  #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
-  # s.osx.deployment_target = "10.7"
+  s.social_media_url   = "http://panyam.wordpress.com"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -66,7 +48,7 @@ Pod::Spec.new do |s|
   #
 
   s.source       = { :git => "https://github.com/panyam/LinkedList.git",
-  					 :tag=> "v0.0.1" }
+  					 :tag=> "v0.0.2" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -76,8 +58,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Sources", "Sources/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "LinkedList", "LinkedList/**/*.{h,m}"
 
   # s.public_header_files = "Classes/**/*.h"
 
