@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
   #
 
   s.source       = { :git => "https://github.com/panyam/LinkedList.git",
-  					 :tag=> "v.0.0.1" }
+  					 :tag=> "v0.0.1" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
