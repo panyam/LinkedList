@@ -5,23 +5,79 @@
 //  Copyright (c) 2015 Sri Panyam. All rights reserved.
 //
 
-#ifndef __LINKED_LIST_H__
-#define __LINKED_LIST_H__
+#include "LinkedList.h"
 
-#import <CoreFoundation/CoreFoundation.h>
+typedef struct LinkedListNode {
+    struct LinkedListNode *prev;
+    struct LinkedListNode *next;
+    size_t dataSize;
+    char data[1];
+} LinkedListNode;
 
-typedef struct LinkedListNode LinkedListNode;
-typedef struct LinkedList LinkedList;
+typedef struct LinkedList {
+    struct LinkedListNode *head;
+    struct LinkedListNode *tail;
+} LinkedList;
 
-extern LinkedListNode *LinkedListNextNode(LinkedListNode *node);
-extern LinkedListNode *LinkedListPrevNode(LinkedListNode *node);
+LinkedListNode *LinkedListNodeNext(LinkedListNode *node) { return node->next; }
+LinkedListNode *LinkedListNodePrev(LinkedListNode *node) { return node->prev; }
+void *LinkedListNodeData(LinkedListNode *node) { return node->data; }
 
-extern LinkedList *LinkedListNew();
-extern LinkedListNode *LinkedListHead(LinkedList *list);
-extern LinkedListNode *LinkedListTail(LinkedList *list);
-extern void *LinkedListAddObject(LinkedList *list, size_t size);
-extern void *ListNodeData(LinkedListNode *node);
-void LinkedListRelease(LinkedList *list, void (^beforeFree)(void *obj, NSInteger index));
-extern void LinkedListIterate(LinkedList *list, void (^)(void *obj, NSUInteger idx, BOOL *stop));
+LinkedList *LinkedListNew()
+{
+    LinkedList *out = malloc(sizeof(LinkedList));
+    out->head = out->tail = 0;
+    return out;
+}
 
-#endif
+LinkedListNode *LinkedListHead(LinkedList *list) { return list->head; }
+LinkedListNode *LinkedListTail(LinkedList *list) { return list->tail; }
+
+void LinkedListRelease(LinkedList *list, void (^beforeFree)(void *obj, NSInteger index))
+{
+    if (list != NULL)
+    {
+        NSInteger index = 0;
+        for (LinkedListNode *curr = list->head;curr != NULL;index++)
+        {
+            LinkedListNode *next = curr->next;
+            if (beforeFree)
+                beforeFree(curr->data, index);
+            free(curr);
+            curr = next;
+        }
+        free(list);
+    }
+}
+
+void *LinkedListAddObject(LinkedList *list, size_t size)
+{
+    LinkedListNode *node = malloc(sizeof(LinkedListNode) + size);
+    bzero(node, sizeof(LinkedListNode) + size);
+    node->next = NULL;
+    node->dataSize = size;
+    if (list->head)
+    {
+        list->tail->next = node;
+        node->prev = list->tail;
+        list->tail = node;
+    } else {
+        list->tail = list->head = node;
+    }
+    return node->data;
+}
+
+void LinkedListIterate(LinkedList *list, void (^block)(void *obj, NSUInteger idx, BOOL *stop))
+{
+    if (list && block)
+    {
+        NSInteger index = 0;
+        BOOL stop = NO;
+        for (LinkedListNode *curr = list->head;curr != NULL && !stop;index++)
+        {
+            LinkedListNode *next = curr->next;
+            block(curr->data, index, &stop);
+            curr = next;
+        }
+    }
+}
