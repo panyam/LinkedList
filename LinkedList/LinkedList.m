@@ -21,7 +21,7 @@ typedef struct LinkedList {
 
 LinkedListNode *LinkedListNodeNext(LinkedListNode *node) { return node->next; }
 LinkedListNode *LinkedListNodePrev(LinkedListNode *node) { return node->prev; }
-void *LinkedListNodeData(LinkedListNode *node) { return node->data; }
+void 		   *LinkedListNodeData(LinkedListNode *node) { return node->data; }
 
 LinkedList *LinkedListNew()
 {
