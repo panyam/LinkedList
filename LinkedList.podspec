@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LinkedList"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "A simple doubly linked list implementation"
 
   s.description  = <<-DESC
@@ -36,8 +36,6 @@ Pod::Spec.new do |s|
   #
 
   s.author             = { "Sri Panyam" => "sri.panyam@gmail.com" }
-  # Or just: s.author    = "Sri Panyam"
-  # s.authors            = { "Sri Panyam" => "sri.panyam@gmail.com" }
   s.social_media_url   = "http://panyam.wordpress.com"
 
 
@@ -47,8 +45,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/panyam/LinkedList.git",
-  					 :tag=> "v0.0.2" }
+  s.source       = { :git => "https://github.com/panyam/LinkedList.git", :tag=> "v0.0.3" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -58,7 +55,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "LinkedList", "LinkedList/**/*.{h,m}"
+  s.source_files  = "LinkedList", "LinkedList/*.{h,m}"
 
   # s.public_header_files = "Classes/**/*.h"
 
