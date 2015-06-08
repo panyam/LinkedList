@@ -17,8 +17,8 @@ extern "C" {
 typedef struct LinkedListNode LinkedListNode;
 typedef struct LinkedList LinkedList;
 
-extern LinkedListNode *LinkedListNextNode(LinkedListNode *node);
-extern LinkedListNode *LinkedListPrevNode(LinkedListNode *node);
+extern LinkedListNode *LinkedListNodeNext(LinkedListNode *node);
+extern LinkedListNode *LinkedListNodePrev(LinkedListNode *node);
 extern void 		  *LinkedListNodeData(LinkedListNode *node);
 
 extern LinkedList *LinkedListNew();
