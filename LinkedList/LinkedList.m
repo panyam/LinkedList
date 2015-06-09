@@ -7,6 +7,7 @@
 
 #include "LinkedList.h"
 
+#pragma LinkedListNode implementation
 typedef struct LinkedListNode {
     struct LinkedListNode *prev;
     struct LinkedListNode *next;
@@ -14,14 +15,15 @@ typedef struct LinkedListNode {
     char data[1];
 } LinkedListNode;
 
+LinkedListNode *LinkedListNodeNext(LinkedListNode *node) { return node->next; }
+LinkedListNode *LinkedListNodePrev(LinkedListNode *node) { return node->prev; }
+void 		   *LinkedListNodeData(LinkedListNode *node) { return node->data; }
+
+#pragma LinkedList implementation
 typedef struct LinkedList {
     struct LinkedListNode *head;
     struct LinkedListNode *tail;
 } LinkedList;
-
-LinkedListNode *LinkedListNodeNext(LinkedListNode *node) { return node->next; }
-LinkedListNode *LinkedListNodePrev(LinkedListNode *node) { return node->prev; }
-void 		   *LinkedListNodeData(LinkedListNode *node) { return node->data; }
 
 LinkedList *LinkedListNew()
 {
@@ -81,3 +83,75 @@ void LinkedListIterate(LinkedList *list, void (^block)(void *obj, NSUInteger idx
         }
     }
 }
+
+
+#pragma LinkedListIterator implementation
+typedef struct LinkedListIterator {
+    struct LinkedList *list;
+    struct LinkedListNode *curr;
+	int index;
+} LinkedListIterator;
+
+LinkedListIterator *LinkedListIterator(LinkedList *list)
+{
+	if (!list)
+		return NULL;
+	LinkedListIterator *iterator = calloc(1, sizeof(LinkedListIterator));
+	iterator->list = list;
+	iterator->curr = list->head;
+	return iterator;
+}
+
+void LinkedListIteratorRelease(LinkedListIterator *iterator)
+{
+	if (iterator)
+	{
+		free(iterator);
+	}
+}
+
+BOOL LinkedListIteratorHasNext(LinkedListIterator *iterator)
+{
+	return iterator && iterator->curr && iterator->curr->next;
+}
+
+BOOL LinkedListIteratorHasPrev(LinkedListIterator *iterator)
+{
+	return iterator && iterator->curr && iterator->curr->prev;
+}
+
+BOOL LinkedListIteratorForward(LinkedListIterator *iterator)
+{
+	if (iterator && iterator->curr)
+	{
+		iterator->curr = iterator->curr->next;
+		iterator->index++;
+	}
+	return iterator->curr != NULL;
+}
+
+BOOL LinkedListIteratorBackward(LinkedListIterator *iterator)
+{
+	if (iterator && iterator->curr)
+	{
+		iterator->curr = iterator->curr->prev;
+		iterator->index--;
+	}
+	return iterator->curr != NULL;
+}
+
+int LinkedListIteratorIndex(LinkedListIterator *iterator)
+{
+	return iterator ? iterator->index : -1;
+}
+
+LinkedListNode *LinkedListIteratorCurrent(LinkedListIterator *iterator)
+{
+	return iterator ? iterator->curr : NULL;
+}
+
+void *LinkedListIteratorValue(LinkedListIterator *iterator)
+{
+	return iterator && iterator->curr ? iterator->curr->data : NULL;
+}
+
