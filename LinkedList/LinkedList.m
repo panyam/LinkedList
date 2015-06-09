@@ -92,7 +92,7 @@ typedef struct LinkedListIterator {
 	int index;
 } LinkedListIterator;
 
-LinkedListIterator *LinkedListIterator(LinkedList *list)
+LinkedListIterator *LinkedListIteratorNew(LinkedList *list)
 {
 	if (!list)
 		return NULL;

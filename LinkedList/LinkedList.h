@@ -16,7 +16,7 @@ extern "C" {
 
 typedef struct LinkedListNode LinkedListNode;
 typedef struct LinkedList LinkedList;
-typedef struct LinkedList LinkedListIterator;
+typedef struct LinkedListIterator LinkedListIterator;
 
 #pragma LinkedListNode methods
 extern LinkedListNode *LinkedListNodeNext(LinkedListNode *node);
@@ -33,7 +33,7 @@ extern void LinkedListRelease(LinkedList *list, void (^beforeFree)(void *obj, NS
 extern void LinkedListIterate(LinkedList *list, void (^)(void *obj, NSUInteger idx, BOOL *stop));
 
 #pragma LinkedListIterator methods
-extern LinkedListIterator *LinkedListIterator(LinkedList *list);
+extern LinkedListIterator *LinkedListIteratorNew(LinkedList *list);
 extern void LinkedListIteratorRelease(LinkedListIterator *iterator);
 extern BOOL LinkedListIteratorHasNext(LinkedListIterator *iterator);
 extern BOOL LinkedListIteratorHasPrev(LinkedListIterator *iterator);
