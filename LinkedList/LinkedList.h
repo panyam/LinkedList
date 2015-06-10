@@ -28,6 +28,7 @@ extern void 		  *LinkedListNodeData(LinkedListNode *node);
 extern LinkedList *LinkedListNew();
 extern LinkedListNode *LinkedListHead(LinkedList *list);
 extern LinkedListNode *LinkedListTail(LinkedList *list);
+extern NSInteger LinkedListCount(LinkedList *list);
 extern void *LinkedListAddObject(LinkedList *list, size_t size);
 extern void LinkedListRelease(LinkedList *list, void (^beforeFree)(void *obj, NSInteger index));
 extern void LinkedListIterate(LinkedList *list, void (^)(void *obj, NSUInteger idx, BOOL *stop));
