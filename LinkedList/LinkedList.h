@@ -39,7 +39,7 @@ extern BOOL LinkedListIteratorHasNext(LinkedListIterator *iterator);
 extern BOOL LinkedListIteratorHasPrev(LinkedListIterator *iterator);
 extern BOOL LinkedListIteratorForward(LinkedListIterator *iterator);
 extern BOOL LinkedListIteratorBackward(LinkedListIterator *iterator);
-extern int LinkedListIteratorIndex(LinkedListIterator *iterator);
+extern NSInteger LinkedListIteratorIndex(LinkedListIterator *iterator);
 extern LinkedListNode *LinkedListIteratorCurrent(LinkedListIterator *iterator);
 extern void *LinkedListIteratorValue(LinkedListIterator *iterator);
 

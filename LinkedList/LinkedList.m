@@ -23,6 +23,7 @@ void 		   *LinkedListNodeData(LinkedListNode *node) { return node->data; }
 typedef struct LinkedList {
     struct LinkedListNode *head;
     struct LinkedListNode *tail;
+	NSInteger count;
 } LinkedList;
 
 LinkedList *LinkedListNew()
@@ -32,8 +33,9 @@ LinkedList *LinkedListNew()
     return out;
 }
 
-LinkedListNode *LinkedListHead(LinkedList *list) { return list->head; }
-LinkedListNode *LinkedListTail(LinkedList *list) { return list->tail; }
+LinkedListNode *LinkedListHead(LinkedList *list) { return list ? list->head : NULL; }
+LinkedListNode *LinkedListTail(LinkedList *list) { return list ? list->tail : NULL; }
+NSInteger LinkedListCount(LinkedList *list) { return list ? list->count : 0; }
 
 void LinkedListRelease(LinkedList *list, void (^beforeFree)(void *obj, NSInteger index))
 {
@@ -66,6 +68,7 @@ void *LinkedListAddObject(LinkedList *list, size_t size)
     } else {
         list->tail = list->head = node;
     }
+	list->count++;
     return node->data;
 }
 
@@ -89,7 +92,7 @@ void LinkedListIterate(LinkedList *list, void (^block)(void *obj, NSUInteger idx
 typedef struct LinkedListIterator {
     struct LinkedList *list;
     struct LinkedListNode *curr;
-	int index;
+	NSInteger index;
 } LinkedListIterator;
 
 LinkedListIterator *LinkedListIteratorNew(LinkedList *list)
@@ -140,7 +143,7 @@ BOOL LinkedListIteratorBackward(LinkedListIterator *iterator)
 	return iterator->curr != NULL;
 }
 
-int LinkedListIteratorIndex(LinkedListIterator *iterator)
+NSInteger LinkedListIteratorIndex(LinkedListIterator *iterator)
 {
 	return iterator ? iterator->index : -1;
 }
