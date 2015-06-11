@@ -97,7 +97,7 @@ typedef struct LinkedListIterator {
 
 LinkedListIterator *LinkedListIteratorNew(LinkedList *list)
 {
-	if (!list)
+	if (!list || !list->head)
 		return NULL;
 	LinkedListIterator *iterator = calloc(1, sizeof(LinkedListIterator));
 	iterator->list = list;
