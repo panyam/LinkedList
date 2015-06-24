@@ -28,9 +28,7 @@ typedef struct LinkedList {
 
 LinkedList *LinkedListNew()
 {
-    LinkedList *out = malloc(sizeof(LinkedList));
-    out->head = out->tail = 0;
-    return out;
+    return calloc(1, sizeof(LinkedList));
 }
 
 LinkedListNode *LinkedListHead(LinkedList *list) { return list ? list->head : NULL; }
@@ -56,7 +54,7 @@ void LinkedListRelease(LinkedList *list, void (^beforeFree)(void *obj, NSInteger
 
 void *LinkedListAddObject(LinkedList *list, size_t size)
 {
-    LinkedListNode *node = malloc(sizeof(LinkedListNode) + size);
+    LinkedListNode *node = calloc(1, sizeof(LinkedListNode) + size);
     bzero(node, sizeof(LinkedListNode) + size);
     node->next = NULL;
     node->dataSize = size;
